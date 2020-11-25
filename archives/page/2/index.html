@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="D3vil">
   <meta name="keywords" content="CTF 期货">
-  <title>Tags - 机器学习 - D3vil&#39;s Blog</title>
+  <title>Archives - D3vil&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -42,7 +42,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -172,19 +172,43 @@
                 
 
 <div class="list-group">
-  <p class="h4">1 posts in total.</p>
+  <p class="h4">13 posts in total.</p>
   <hr>
   
     
       
       <p class="h5">2020</p>
     
-    <a href="/2020/11/02/ai-learn/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">ai_learn</span>
-      <span style="float: right;">11-02</span>
+    <a href="/2020/06/19/xss-train/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">xss_train</span>
+      <span style="float: right;">06-19</span>
+    </a>
+  
+    
+    <a href="/2020/06/16/django-learn/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">django_learn</span>
+      <span style="float: right;">06-16</span>
+    </a>
+  
+    
+    <a href="/2020/06/14/http_leek/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">账户权限认证</span>
+      <span style="float: right;">06-14</span>
     </a>
   
 </div>
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/archives/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
@@ -277,7 +301,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Tag - 机器学习&nbsp;",
+        "Archive&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

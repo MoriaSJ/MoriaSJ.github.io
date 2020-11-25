@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="D3vil">
   <meta name="keywords" content="CTF 期货">
-  <title>ai_learn - D3vil&#39;s Blog</title>
+  <title>反序列 - D3vil&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -164,8 +164,8 @@
               
   <div class="mt-3 post-meta">
     <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-    <time datetime="2020-11-02 18:48">
-      2020年11月2日 晚上
+    <time datetime="2020-08-28 10:49">
+      2020年8月28日 上午
     </time>
   </div>
 
@@ -175,7 +175,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4 字
+      569 字
     </span>
   
 
@@ -185,7 +185,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      7
        分钟
     </span>
   
@@ -216,7 +216,66 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h1>
+              <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>一直想找个时间强化下专题训练，反序列在实战代码审计中用的挺多的，但我一直都没有好好强化过，连一条很短的pop链都构造不出来，这两天好好强化下。</p>
+<h2 id="0x01-从基础开始"><a href="#0x01-从基础开始" class="headerlink" title="0x01 从基础开始"></a>0x01 从基础开始</h2><p>利用serialize将一个对象转化为字符串形式。</p>
+<pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span></span>&#123;
+	<span class="hljs-keyword">public</span> $name = <span class="hljs-string">'d3vil'</span>;
+	<span class="hljs-keyword">protected</span> $age = <span class="hljs-number">18</span>;
+	<span class="hljs-keyword">private</span> $sex = <span class="hljs-string">'boy'</span>;
+&#125;
+$a = <span class="hljs-keyword">new</span> A();
+
+print_r($a);
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/br&gt;"</span>;
+$ser_a = serialize($a);
+
+print_r($ser_a);</code></pre>
+
+
+
+<p>得到的结果是</p>
+<p>A Object (    [name] =&gt; d3vil    [age:protected] =&gt; 18    [sex:A:private] =&gt; boy )<br>O:1:”A”:3:{s:4:”name”;s:5:”d3vil”;s:6:”*age”;i:18;s:6:”Asex”;s:3:”boy”;}</p>
+<p>O代表是一个类实例化对象</p>
+<p>1是类名称长度</p>
+<p>A是类名称</p>
+<p>有3个成员属性</p>
+<p>s代表字符串</p>
+<p>长度为4的name</p>
+<p>值是长度为5的d3vil</p>
+<p>注意后面两个属性，一个是protected,一个是private</p>
+<p>我们用urlencode之后看看</p>
+<p>O%3A1%3A%22A%22%3A3%3A%7Bs%3A4%3A%22name%22%3Bs%3A5%3A%22d3vil%22%3Bs%3A6%3A%22%00%2A%00age%22%3Bi%3A18%3Bs%3A6%3A%22%00A%00sex%22%3Bs%3A3%3A%22boy%22%3B%7D</p>
+<p>在protected属性中，键名前要加%00%2A%00age，也就是\x00*\x00，这也是键名长度为6的原因，在private键名前要加\x00类名\x00。</p>
+<pre><code class="hljs lasso">三者区别
+
+<span class="hljs-keyword">public</span>(公共的):在本类内部、外部类、子类都可以访问
+
+<span class="hljs-keyword">protect</span>(受保护的):只有本类或子类或父类中可以访问
+
+<span class="hljs-keyword">private</span>(私人的):只有本类内部可以使用
+
+可以看出，<span class="hljs-keyword">protect</span>是只是不让外部访问，<span class="hljs-keyword">private</span>是只能本类访问。
+
+所以$a -&gt; sex = <span class="hljs-string">'123'</span>;这种方式只有<span class="hljs-keyword">public</span>才行，在构造链子的时候，如果要改其他两个直接在类函数里加</code></pre>
+
+
+
+<h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><p>定义：反序列化就是利用<code>unserailize()</code>函数将一个经过序列化的字符串还原成php代码形式</p>
+<h4 id="反序列化漏洞原理"><a href="#反序列化漏洞原理" class="headerlink" title="反序列化漏洞原理"></a>反序列化漏洞原理</h4><p>在反序列的时候会调用魔术方法</p>
+<pre><code class="hljs less"><span class="hljs-selector-tag">__construct</span>()当一个对象创建时被调用
+
+<span class="hljs-selector-tag">__destruct</span>()当一个对象销毁时被调用
+
+<span class="hljs-selector-tag">__toString</span>()当反序列化后的对象被输出的时候(转化为字符串的时候)被调用
+
+<span class="hljs-selector-tag">__sleep</span>() 在对象在被序列化之前运行
+
+<span class="hljs-selector-tag">__wakeup</span>将在序列化之后立即被调用</code></pre>
+
+
             </article>
             <hr>
             <div>
@@ -226,7 +285,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                      <a class="hover-with-bg" href="/tags/ctf-%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">ctf 代码审计</a>
                     
                   </div>
                 
@@ -239,9 +298,9 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/11/14/%E5%BC%B9shell%E7%9A%84%E6%96%B9%E5%BC%8F/">
+                      <a href="/2020/09/01/larvel/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">弹shell的方式</span>
+                        <span class="hidden-mobile">larvel</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -249,8 +308,8 @@
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/09/01/larvel/">
-                        <span class="hidden-mobile">larvel</span>
+                      <a href="/2020/07/16/vulhub/">
+                        <span class="hidden-mobile">vulhub</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -389,7 +448,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "ai_learn&nbsp;",
+        "反序列&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

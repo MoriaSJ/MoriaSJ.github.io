@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="D3vil">
+  <meta name="keywords" content="CTF 期货">
+  <title>solidity - D3vil&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>D3vil</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2020-06-20 15:12">
+      2020年6月20日 下午
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="Ethernaut"><a href="#Ethernaut" class="headerlink" title="Ethernaut"></a>Ethernaut</h1><p>本篇将从这个平台开始，并且尝试用合约的方式进行交互完成，因为ctf中大部分都是要合约交互的。</p>
+<h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>第一关主要是讲一些abi的调用方式。</p>
+<p>源码</p>
+<pre><code class="hljs typescript">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.18</span>;
+
+contract Instance &#123;
+
+  <span class="hljs-built_in">string</span> <span class="hljs-keyword">public</span> password;
+  uint8 <span class="hljs-keyword">public</span> infoNum = <span class="hljs-number">42</span>;
+  <span class="hljs-built_in">string</span> <span class="hljs-keyword">public</span> theMethodName = <span class="hljs-string">'The method name is method7123949.'</span>;
+  bool <span class="hljs-keyword">private</span> cleared = <span class="hljs-literal">false</span>;
+
+  <span class="hljs-comment">// constructor</span>
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Instance</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> _password</span>) <span class="hljs-title">public</span> </span>&#123;
+    password = _password;
+  &#125;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">info</span>(<span class="hljs-params"></span>) <span class="hljs-title">public</span> <span class="hljs-title">pure</span> <span class="hljs-title">returns</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'You will find what you need in info1().'</span>;
+  &#125;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">info1</span>(<span class="hljs-params"></span>) <span class="hljs-title">public</span> <span class="hljs-title">pure</span> <span class="hljs-title">returns</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'Try info2(), but with "hello" as a parameter.'</span>;
+  &#125;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">info2</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> param</span>) <span class="hljs-title">public</span> <span class="hljs-title">pure</span> <span class="hljs-title">returns</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>) </span>&#123;
+    <span class="hljs-keyword">if</span>(keccak256(param) == keccak256(<span class="hljs-string">'hello'</span>)) &#123;
+      <span class="hljs-keyword">return</span> <span class="hljs-string">'The property infoNum holds the number of the next info method to call.'</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'Wrong parameter.'</span>;
+  &#125;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">info42</span>(<span class="hljs-params"></span>) <span class="hljs-title">public</span> <span class="hljs-title">pure</span> <span class="hljs-title">returns</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'theMethodName is the name of the next method.'</span>;
+  &#125;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">method7123949</span>(<span class="hljs-params"></span>) <span class="hljs-title">public</span> <span class="hljs-title">pure</span> <span class="hljs-title">returns</span> (<span class="hljs-params"><span class="hljs-built_in">string</span></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'If you know the password, submit it to authenticate().'</span>;
+  &#125;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">authenticate</span>(<span class="hljs-params"><span class="hljs-built_in">string</span> passkey</span>) <span class="hljs-title">public</span> </span>&#123;
+    <span class="hljs-keyword">if</span>(keccak256(passkey) == keccak256(password)) &#123;
+      cleared = <span class="hljs-literal">true</span>;
+    &#125;
+  &#125;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getCleared</span>(<span class="hljs-params"></span>) <span class="hljs-title">public</span> <span class="hljs-title">view</span> <span class="hljs-title">returns</span> (<span class="hljs-params">bool</span>) </span>&#123;
+    <span class="hljs-keyword">return</span> cleared;
+  &#125;
+&#125;</code></pre>
+
+
+
+<pre><code class="hljs ruby"><span class="hljs-meta">&gt;&gt;</span> contract.address
+<span class="hljs-meta">&gt;&gt;</span> <span class="hljs-string">"0x077ba30f5810b179f9ac0b0de5d2968023809d80"</span></code></pre>
+
+<p>函数修饰词</p>
+<blockquote>
+<p>view function</p>
+<ul>
+<li><p>Modifying state variables.</p>
+</li>
+<li><p>Emitting events.</p>
+</li>
+<li><p>Creating other contracts.</p>
+</li>
+<li><p>Using selfdestruct.</p>
+</li>
+<li><p>Sending Ether via calls.</p>
+</li>
+<li><p>Calling any function which is not marked view or pure.</p>
+</li>
+<li><p>Using low-level calls.</p>
+</li>
+<li><p>Using inline assembly containing certain opcodes.</p>
+</li>
+<li><pre><code>pragma solidity ^0.4.21;
+
+contract constantViewPure{
+    string name;
+    uint public age;
+
+    function constantViewPure() public{
+        name = &quot;liushiming&quot;;
+        age = 29;
+    }
+
+    function getAgeByConstant() public constant returns(uint){
+        age += 1;  //声明为constant，在函数体中又试图去改变状态变量的值，编译会报warning, 但是可以通过
+        return age;  // return 30, 但是！状态变量age的值不会改变，仍然为29！
+    } 
+
+    function getAgeByView() public view returns(uint){
+        age += 1; //view和constant效果一致，编译会报warning，但是可以通过
+        return age; // return 30，但是！状态变量age的值不会改变，仍然为29！
+    }
+
+    function getAgeByPure() public pure returns(uint){
+        return age; //编译报错！pure比constant和view都要严格，pure完全禁止读写状态变量！
+        return 1;
+    }
+}
+<pre><code class="hljs">
+
+
+![](/img/block/1.png)
+
+需要注意的是，静态方法不需要gas，应为不需要合约，图中为蓝色的就是静态方法可以秒get状态变量和返回值，而黄色的是需要交互的，并且可以改变合约的状态变量，需要矿工来验证的，那么就需要支付gas并确定。
+
+
+
+第一关主要是如何和合约交互
+
+![](/img/block/2.png)
+
+也可以用控制台内进行交互，可以看到contract对象下的所有东西，应为这个是和我们的插件交互过的，所以也可以敲player拿到自己的地址，也可以看到这个对象下的方法，在控制台下调用（这个是这个网站写的js吧？ctf中经常需要我们自己写合约交互，所以我就不依赖这个了。）也可以看到这个abi。
+
+<span class="hljs-attribute">abi大概写了：</span>
+<span class="hljs-attribute"></span>
+- 是否是个constant类的方法
+- 参数怎么样？有几个？
+- 函数名？
+- return
+- 是否可支付？接收ether
+
+## 0x01
+
+第一关开始讲一些已知的实际漏洞 </code></pre>
+pragma solidity ^0.4.18;</code></pre></li>
+</ul>
+</blockquote>
+<p>import ‘zeppelin-solidity/contracts/ownership/Ownable.sol’;<br>import ‘openzeppelin-solidity/contracts/math/SafeMath.sol’;</p>
+<p>contract Fallback is Ownable {</p>
+<p>  using SafeMath for uint256;<br>  mapping(address =&gt; uint) public contributions;</p>
+<p>  function Fallback() public {<br>    contributions[msg.sender] = 1000 * (1 ether);<br>  }</p>
+<p>  function contribute() public payable {<br>    require(msg.value &lt; 0.001 ether);<br>    contributions[msg.sender] = contributions[msg.sender].add(msg.value);<br>    if(contributions[msg.sender] &gt; contributions[owner]) {<br>      owner = msg.sender;<br>    }<br>  }</p>
+<p>  function getContribution() public view returns (uint) {<br>    return contributions[msg.sender];<br>  }</p>
+<p>  function withdraw() public onlyOwner {<br>    owner.transfer(this.balance);<br>  }</p>
+<p>  function() payable public {<br>    require(msg.value &gt; 0 &amp;&amp; contributions[msg.sender] &gt; 0);<br>    owner = msg.sender;<br>  }<br>}</p>
+<pre><code class="hljs plain">
+放在remix里一大堆报错，把函数内容全删了只留函数声明。</code></pre>
+<p> =&gt; Instance address  0xb1544a094bcb84692709a08553c7e670a1ba2ed4</p>
+<pre><code class="hljs shell">
+过关条件
+
+1. you claim ownership of the contract
+2. you reduce its balance to 0
+
+
+
+ok，思路清晰了，要成为合约owner，并且balance为0
+
+要想成为owner：
+
+1. 贡献1000eth？？？？给爷爬
+2. 调用fallback函数。
+
+<span class="hljs-meta">&gt;</span><span class="bash"> <span class="hljs-comment">### Fallback</span></span>
+<span class="hljs-meta">&gt;</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> //</span>
+<span class="hljs-meta">&gt;</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> fallback函数，回退函数，是合约里的特殊无名函数，有且仅有一个[1](https://me.tryblockchain.org/blockchain-solidity-fallback.html<span class="hljs-comment">#fn1)。它在合约调用没有匹配到函数签名，或者调用没有带任何数据时被自动调用。</span></span>
+<span class="hljs-meta">&gt;</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> 回退函数是合约里的特殊函数，没有名字，不能有参数，没有返回值。下面来看一个简单的回退函数例子。</span>
+<span class="hljs-meta">&gt;</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> ```text</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> pragma solidity ^0.4.0;</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> </span>
+<span class="hljs-meta">&gt;</span><span class="bash"> contract SimpleFallback&#123;</span>
+<span class="hljs-meta">&gt;</span><span class="bash">   <span class="hljs-function"><span class="hljs-title">function</span></span>()&#123;</span>
+<span class="hljs-meta">&gt;</span><span class="bash">     //fallback <span class="hljs-keyword">function</span></span>
+<span class="hljs-meta">&gt;</span><span class="bash">   &#125;</span>
+<span class="hljs-meta">&gt;</span><span class="bash"> &#125;</span>
+<span class="hljs-meta">&gt;</span></code></pre>
+
+
+
+<p>注意：</p>
+<p>​    在调用send函数时因为没有函数调用会默认调用fallback函数，所以要注意fallback函数要加payable，且在fallback里面不能有写入操作，因为会调用gas而导致无限消耗，DAO就是这样被黑的。</p>
+<blockquote>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>区块链是打包一系列交易的区块组成的链条，每一个交易“收据”会包含0到多个日志记录，日志代表着智能合约所触发的事件。</p>
+</blockquote>
+<p>回到第一关，</p>
+<p>要调用fallback我们需要给他转账，可以在console里contract.contribute({value:1})</p>
+<p>来转账也可以直接用metamask转账，注意金额要小于0.001,可以注意初始函数中显示的owner的eth是1000</p>
+<p>那么我们要1000/0.001一次转账显然是不可能的现在我们随便调用一个不存在的函数试试？</p>
+<p>叼你妈的，不是可以调用fallback吗？？？操</p>
+<p>走另一条，send函数调用的路子，contract.sendTransaction({value:1})来调用</p>
+<p><img src="/img/block/3.png" srcset="/img/loading.gif" alt=""></p>
+<p>我透？？啥时候合约变成我的了？透再来一次。</p>
+<p>=&gt; Instance address        0xcf71f5f466d0da1ae24721a295695322e2b72a96</p>
+<p><img src="/img/block/4.png" srcset="/img/loading.gif" alt=""></p>
+<p>现在合约不是我的也没贡献，先打钱。</p>
+<p>脑壳痛，打钱他不收，你妈嗨！</p>
+<p>这新合约那么傲娇吗？？？？？？</p>
+<p>哦我知了。。。。。。这尼玛就是前面说的那种，fallback函数里面直接写了状态量，所以会不断消耗gas，刚才我能调用是因为合约owner是我的了，没有发生改变不消耗gas。但为什么console里调用console.contribute()就可以了？？？应该是这种方式没有像send函数那样默认调用fallback</p>
+<p>没解决得到，先留着吧。</p>
+<p>好了现在有了贡献之后就可以用插件给他打钱，并且这个也把owner改为了我们。刚才是因为没贡献就进不到fallback里机会一直卡着</p>
+<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><ul>
+<li><input disabled="" type="checkbox"> <p>怎么在fallback这题里用contribute合约交互把value传进去</p>
+<p>1.console里用contract.contribute({value:1})</p>
+<p>那么用abi交互的方式呢？</p>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <p>这个withdraw函数也不能调用。。。。（没那么多钱。。。合约内就要少很多）</p>
+</li>
+<li><input disabled="" type="checkbox"> </li>
+</ul>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">智能合约</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/16/vulhub/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vulhub</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/19/xss-train/">
+                        <span class="hidden-mobile">xss_train</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "solidity&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

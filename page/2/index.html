@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="D3vil">
   <meta name="keywords" content="CTF 期货">
-  <title>Tags - 机器学习 - D3vil&#39;s Blog</title>
+  <title>D3vil&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -42,7 +42,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -155,6 +155,10 @@
           </div>
 
           
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
         </div>
       </div>
     </div>
@@ -164,27 +168,156 @@
     
       <div class="container nopadding-md">
         <div class="py-5" id="board"
-          >
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">1 posts in total.</p>
-  <hr>
-  
+
+  <div class="row mx-auto index-card">
     
-      
-      <p class="h5">2020</p>
     
-    <a href="/2020/11/02/ai-learn/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">ai_learn</span>
-      <span style="float: right;">11-02</span>
-    </a>
-  
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/06/19/xss-train/">xss_train</a>
+
+      <a href="/2020/06/19/xss-train/" class="index-excerpt">
+        
+        
+          
+        
+        <div>xss fuck收集的payload&lt;img src=x onerror=alert(1)&gt;&lt;/img&gt;
+&lt;svg/onload=alert(1)&gt;&lt;/svg&gt;
+" onmouseover=alert(1) a="
+javascript:alert(1)
+&lt;script&gt;alert(1)&lt;/script&gt;
+&lt;hr&gt;</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-06-19
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/xss/">xss</a>
+            
+              <a href="/tags/web/">web</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/06/16/django-learn/">django_learn</a>
+
+      <a href="/2020/06/16/django-learn/" class="index-excerpt">
+        
+        
+          
+        
+        <div>django开发
+开发能力太弱了，学学django的开发….
+
+0x00 环境搭建生成虚拟环境，在其中的环境配置不会影响主配置
+vitualenvpip install virtualenv
+virtualenv my_env			//生成虚拟目录
+source my_env/bin/activate			//激活环境
+source my_env/bin/deactivate			//禁用
+
+
+
 </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-06-16
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/develop/">develop</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/06/14/http_leek/">账户权限认证</a>
+
+      <a href="/2020/06/14/http_leek/" class="index-excerpt">
+        
+        
+          
+        
+        <div>账户安全权限管理Oauth
+随着各类web应用层出不穷，为了让权限管理和访问控制更方便，引入了oauth体系，我们在访问应用时可以通过第三方应用授权来登录，如微信支付宝登录。
+
+用户点击登录
+ //
+ 告诉login页面我要用第三方平台上你
+ 然后这个login页面就会回答你：
+ 好的你去跟老大哥说下吧，你要告诉这个地址三件事：
+ 1.是我让你来的 client_id
+ 
+ 2.用code授权模式</div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-06-14
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/">漏洞挖掘</a>
+            
+              <a href="/tags/web%E5%AE%89%E5%85%A8/">web安全</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </span>
+  </nav>
+  
+  <script>
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
+      ele.href += '#board';
+    }
+  </script>
 
 
 
@@ -277,7 +410,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Tag - 机器学习&nbsp;",
+        "Free from think,Free from talk.&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
