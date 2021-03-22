@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="D3vil">
+  <meta name="keywords" content="CTF 期货">
+  <title>cc学习 - D3vil&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_yg9cfy8wd6.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>D3vil</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                ホーム
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                アーカイブ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                カテゴリー
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                タグ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                本ブログ情報　
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                リンク
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+  <div class="mt-3 post-meta">
+    <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+    <time datetime="2021-03-22 18:08">
+      2021年3月22日 晚上
+    </time>
+  </div>
+
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      44
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <article class="markdown-body">
+              <h1 id="cc基础学习"><a href="#cc基础学习" class="headerlink" title="cc基础学习"></a>cc基础学习</h1><h2 id="0x00-目标"><a href="#0x00-目标" class="headerlink" title="0x00 目标"></a>0x00 目标</h2><p>希望在半年内学一下java的web应用，之前在ctf中多接触的是python和php的web应用，作为一条web🐶表示要上进！23333</p>
+<p>收入方面希望再上一层楼，过去一年实现了质的突破，通过比赛奖金，漏洞挖掘还有股票赚到了生命中第一个十万，希望接下来再接再厉。</p>
+<p>java的话学会jsp那些吧？还有能用spring boot那些开发点小东西就不错了，股票技能方面的话之前学会了技术分析，这一年可以学下量化之类的，毕竟自己看图还是太累了。</p>
+<p>在行业内，啊这，我想成为量化交易员。。。行业内比较厉害的就是李佛摩尔了吧，羡慕他。。。。羡慕他啥都没学都能征服华尔街。。。不过我相信我能做的更好，因为我有黑客的思维，我觉得能把网络战和金融战结合起来打超限战</p>
+<h2 id="0x01-Linux运维"><a href="#0x01-Linux运维" class="headerlink" title="0x01 Linux运维"></a>0x01 Linux运维</h2><pre><code class="hljs angelscript">#卸载安装
+Sudo yum install nginx
+sudo yum remove
+
+#查看cpu
+&gt;cat /proc/cpuinfo
+processor       : <span class="hljs-number">0</span>
+model name      : Phytium,FT<span class="hljs-number">-2000</span>+/<span class="hljs-number">64</span>
+BogoMIPS        : <span class="hljs-number">100.00</span>
+Features        : fp asimd evtstrm crc32 cpuid
+CPU implementer : <span class="hljs-number">0x70</span>
+CPU architecture: <span class="hljs-number">8</span>
+CPU variant     : <span class="hljs-number">0x1</span>
+CPU part        : <span class="hljs-number">0x662</span>
+CPU revision    : <span class="hljs-number">2</span>
+
+processor       : <span class="hljs-number">1</span>
+model name      : Phytium,FT<span class="hljs-number">-2000</span>+/<span class="hljs-number">64</span>
+BogoMIPS        : <span class="hljs-number">100.00</span>
+Features        : fp asimd evtstrm crc32 cpuid
+CPU implementer : <span class="hljs-number">0x70</span>
+CPU architecture: <span class="hljs-number">8</span>
+CPU variant     : <span class="hljs-number">0x1</span>
+CPU part        : <span class="hljs-number">0x662</span>
+CPU revision    : <span class="hljs-number">2</span>
+
+processor       : <span class="hljs-number">2</span>
+model name      : Phytium,FT<span class="hljs-number">-2000</span>+/<span class="hljs-number">64</span>
+BogoMIPS        : <span class="hljs-number">100.00</span>
+Features        : fp asimd evtstrm crc32 cpuid
+CPU implementer : <span class="hljs-number">0x70</span>
+CPU architecture: <span class="hljs-number">8</span>
+CPU variant     : <span class="hljs-number">0x1</span>
+CPU part        : <span class="hljs-number">0x662</span>
+CPU revision    : <span class="hljs-number">2</span>
+
+processor       : <span class="hljs-number">3</span>
+model name      : Phytium,FT<span class="hljs-number">-2000</span>+/<span class="hljs-number">64</span>
+BogoMIPS        : <span class="hljs-number">100.00</span>
+Features        : fp asimd evtstrm crc32 cpuid
+CPU implementer : <span class="hljs-number">0x70</span>
+CPU architecture: <span class="hljs-number">8</span>
+CPU variant     : <span class="hljs-number">0x1</span>
+CPU part        : <span class="hljs-number">0x662</span>
+CPU revision    : <span class="hljs-number">2</span>
+可以看到是<span class="hljs-number">4</span>核
+
+#查看cpu利用率
+&gt;top
+top - <span class="hljs-number">19</span>:<span class="hljs-number">41</span>:<span class="hljs-number">08</span> up  <span class="hljs-number">2</span>:<span class="hljs-number">08</span>,  <span class="hljs-number">4</span> users,  load average: <span class="hljs-number">0.59</span>, <span class="hljs-number">0.22</span>, <span class="hljs-number">0.07</span>
+Tasks: <span class="hljs-number">203</span> total,   <span class="hljs-number">1</span> running, <span class="hljs-number">201</span> sleeping,   <span class="hljs-number">0</span> stopped,   <span class="hljs-number">1</span> zombie
+%Cpu(s):  <span class="hljs-number">2.7</span> us,  <span class="hljs-number">7.4</span> sy,  <span class="hljs-number">0.0</span> ni, <span class="hljs-number">89.6</span> id,  <span class="hljs-number">0.0</span> wa,  <span class="hljs-number">0.1</span> hi,  <span class="hljs-number">0.2</span> si,  <span class="hljs-number">0.0</span> st
+MiB Mem :   <span class="hljs-number">7577.8</span> total,   <span class="hljs-number">4820.1</span> free,   <span class="hljs-number">1311.8</span> used,   <span class="hljs-number">1445.9</span> buff/cache
+MiB Swap:   <span class="hljs-number">4095.9</span> total,   <span class="hljs-number">4095.9</span> free,      <span class="hljs-number">0.0</span> used.   <span class="hljs-number">5136.5</span> avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND                                                                     
+ <span class="hljs-number">112568</span> greatwa+  <span class="hljs-number">20</span>   <span class="hljs-number">0</span>   <span class="hljs-number">48704</span>  <span class="hljs-number">13440</span>   <span class="hljs-number">4608</span> S   <span class="hljs-number">1.3</span>   <span class="hljs-number">0.2</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00.92</span> sshd 
+ 可以看到<span class="hljs-number">1.3</span>%的cpu利用率，<span class="hljs-number">0.2</span>%的内存利用率
+ 
+ #查看磁盘利用率
+ [<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> ~]$ df
+文件系统               <span class="hljs-number">1</span>K-块    已用     可用 已用% 挂载点
+devtmpfs             <span class="hljs-number">3598080</span>       <span class="hljs-number">0</span>  <span class="hljs-number">3598080</span>    <span class="hljs-number">0</span>% /dev
+tmpfs                <span class="hljs-number">3879808</span>     <span class="hljs-number">256</span>  <span class="hljs-number">3879552</span>    <span class="hljs-number">1</span>% /dev/shm
+tmpfs                <span class="hljs-number">3879808</span>   <span class="hljs-number">17344</span>  <span class="hljs-number">3862464</span>    <span class="hljs-number">1</span>% /run
+tmpfs                <span class="hljs-number">3879808</span>       <span class="hljs-number">0</span>  <span class="hljs-number">3879808</span>    <span class="hljs-number">0</span>% /sys/fs/cgroup
+/dev/mapper/gw-root <span class="hljs-number">36473448</span> <span class="hljs-number">8461912</span> <span class="hljs-number">28011536</span>   <span class="hljs-number">24</span>% /
+tmpfs                <span class="hljs-number">3879808</span>     <span class="hljs-number">384</span>  <span class="hljs-number">3879424</span>    <span class="hljs-number">1</span>% /tmp
+/dev/vda2            <span class="hljs-number">1038336</span>  <span class="hljs-number">358096</span>   <span class="hljs-number">680240</span>   <span class="hljs-number">35</span>% /boot
+/dev/vda1             <span class="hljs-number">204580</span>    <span class="hljs-number">5844</span>   <span class="hljs-number">198736</span>    <span class="hljs-number">3</span>% /boot/efi
+tmpfs                 <span class="hljs-number">775936</span>     <span class="hljs-number">768</span>   <span class="hljs-number">775168</span>    <span class="hljs-number">1</span>% /run/user/<span class="hljs-number">1000</span>
+
+#查看当前进程
+ps aux|less
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           <span class="hljs-number">1</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.2</span> <span class="hljs-number">116800</span> <span class="hljs-number">17472</span> ?        Ss   <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">04</span> /usr/lib/systemd/systemd --switched-root --system --deserialize <span class="hljs-number">18</span>
+root           <span class="hljs-number">2</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span>      <span class="hljs-number">0</span>     <span class="hljs-number">0</span> ?        S    <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> [kthreadd]
+root           <span class="hljs-number">3</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span>      <span class="hljs-number">0</span>     <span class="hljs-number">0</span> ?        I&lt;   <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> [rcu_gp]
+root           <span class="hljs-number">4</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span>      <span class="hljs-number">0</span>     <span class="hljs-number">0</span> ?        I&lt;   <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> [rcu_par_gp]
+root           <span class="hljs-number">6</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span>      <span class="hljs-number">0</span>     <span class="hljs-number">0</span> ?        I&lt;   <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> [kworker/<span class="hljs-number">0</span>:<span class="hljs-number">0</span>H-kblockd]
+root           <span class="hljs-number">8</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span>      <span class="hljs-number">0</span>     <span class="hljs-number">0</span> ?        I&lt;   <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> [mm_percpu_wq]
+root           <span class="hljs-number">9</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span>      <span class="hljs-number">0</span>     <span class="hljs-number">0</span> ?        S    <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> [ksoftirqd/<span class="hljs-number">0</span>]
+root          <span class="hljs-number">10</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span>      <span class="hljs-number">0</span>     <span class="hljs-number">0</span> ?        I    <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">03</span> [rcu_sched]
+root          <span class="hljs-number">11</span>  <span class="hljs-number">0.0</span>  <span class="hljs-number">0.0</span>      <span class="hljs-number">0</span>     <span class="hljs-number">0</span> ?        I    <span class="hljs-number">17</span>:<span class="hljs-number">32</span>   <span class="hljs-number">0</span>:<span class="hljs-number">00</span> [rcu_bh]
+...
+
+#查看内核信息
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> ~]$ uname -a
+Linux <span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> <span class="hljs-number">4.19</span><span class="hljs-number">.90</span><span class="hljs-number">-17.5</span>.ky10.aarch64 #<span class="hljs-number">1</span> SMP Fri Aug <span class="hljs-number">7</span> <span class="hljs-number">13</span>:<span class="hljs-number">35</span>:<span class="hljs-number">33</span> CST <span class="hljs-number">2020</span> aarch64 aarch64 aarch64 GNU/Linux
+
+#查看网卡
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> ~]$ ifconfig
+docker0: flags=<span class="hljs-number">4099</span>&lt;UP,BROADCAST,MULTICAST&gt;  mtu <span class="hljs-number">1500</span>
+        inet <span class="hljs-number">172.18</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>  netmask <span class="hljs-number">255.255</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>  broadcast <span class="hljs-number">172.18</span><span class="hljs-number">.255</span><span class="hljs-number">.255</span>
+        ether <span class="hljs-number">02</span>:<span class="hljs-number">42</span>:d4:b0:<span class="hljs-number">2f</span>:<span class="hljs-number">06</span>  txqueuelen <span class="hljs-number">0</span>  (Ethernet)
+        RX packets <span class="hljs-number">0</span>  bytes <span class="hljs-number">0</span> (<span class="hljs-number">0.0</span> B)
+        RX errors <span class="hljs-number">0</span>  dropped <span class="hljs-number">0</span>  overruns <span class="hljs-number">0</span>  frame <span class="hljs-number">0</span>
+        TX packets <span class="hljs-number">0</span>  bytes <span class="hljs-number">0</span> (<span class="hljs-number">0.0</span> B)
+        TX errors <span class="hljs-number">0</span>  dropped <span class="hljs-number">0</span> overruns <span class="hljs-number">0</span>  carrier <span class="hljs-number">0</span>  collisions <span class="hljs-number">0</span>
+
+enp1s0: flags=<span class="hljs-number">4163</span>&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu <span class="hljs-number">1500</span>
+        inet <span class="hljs-number">172.17</span><span class="hljs-number">.230</span><span class="hljs-number">.8</span>  netmask <span class="hljs-number">255.255</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>  broadcast <span class="hljs-number">172.17</span><span class="hljs-number">.255</span><span class="hljs-number">.255</span>
+        ether fa:<span class="hljs-number">60</span>:<span class="hljs-number">0</span>b:<span class="hljs-number">49</span>:<span class="hljs-number">1f</span>:<span class="hljs-number">00</span>  txqueuelen <span class="hljs-number">1000</span>  (Ethernet)
+        RX packets <span class="hljs-number">298986</span>  bytes <span class="hljs-number">30966719</span> (<span class="hljs-number">29.5</span> MiB)
+        RX errors <span class="hljs-number">0</span>  dropped <span class="hljs-number">0</span>  overruns <span class="hljs-number">0</span>  frame <span class="hljs-number">0</span>
+        TX packets <span class="hljs-number">75780</span>  bytes <span class="hljs-number">19531935</span> (<span class="hljs-number">18.6</span> MiB)
+        TX errors <span class="hljs-number">0</span>  dropped <span class="hljs-number">0</span> overruns <span class="hljs-number">0</span>  carrier <span class="hljs-number">0</span>  collisions <span class="hljs-number">0</span>
+
+lo: flags=<span class="hljs-number">73</span>&lt;UP,LOOPBACK,RUNNING&gt;  mtu <span class="hljs-number">65536</span>
+        inet <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>  netmask <span class="hljs-number">255.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>
+        inet6 ::<span class="hljs-number">1</span>  prefixlen <span class="hljs-number">128</span>  scopeid <span class="hljs-number">0x10</span>&lt;host&gt;
+        loop  txqueuelen <span class="hljs-number">1000</span>  (Local Loopback)
+        RX packets <span class="hljs-number">118</span>  bytes <span class="hljs-number">11156</span> (<span class="hljs-number">10.8</span> KiB)
+        RX errors <span class="hljs-number">0</span>  dropped <span class="hljs-number">0</span>  overruns <span class="hljs-number">0</span>  frame <span class="hljs-number">0</span>
+        TX packets <span class="hljs-number">118</span>  bytes <span class="hljs-number">11156</span> (<span class="hljs-number">10.8</span> KiB)
+        TX errors <span class="hljs-number">0</span>  dropped <span class="hljs-number">0</span> overruns <span class="hljs-number">0</span>  carrier <span class="hljs-number">0</span>  collisions <span class="hljs-number">0</span>
+
+#查看dns
+<span class="hljs-number">1.</span>cat /etc/sysconfig
+<span class="hljs-number">2.</span>nslookup
+<span class="hljs-number">3.</span>cat /etc/resolv.conf
+
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> ~]$ cat /etc/resolv.conf
+; generated by /usr/sbin/dhclient-script
+nameserver <span class="hljs-number">223.5</span><span class="hljs-number">.5</span><span class="hljs-number">.5</span>
+
+#列出/etc下文件
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> ~]$ ls /etc
+adjtime                    dnf             gtk<span class="hljs-number">-3.0</span>         localtime_tmp             ntp               resolv.conf           sysctl.conf
+aliases                    dnsmasq.conf    ha.d            login.defs                ntp.conf          rhashrc               sysctl.d
+alternative...
+
+#复制一个文件到opt下并修改
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> ~]$ sudo cp /etc/locale.conf /opt/<span class="hljs-number">1</span>
+[sudo] greatwall 的密码：
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> ~]$ cd /opt/
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> opt]$ ls
+<span class="hljs-number">1</span>  containerd  firefox  patch_workspace
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> opt]$ vim <span class="hljs-number">1</span>
+
+#查看对外监听端口
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> opt]$ netstat -ano
+Active Internet connections (servers <span class="hljs-keyword">and</span> established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       Timer
+tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">111</span>             <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:*               LISTEN      off (<span class="hljs-number">0.00</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">22</span>              <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:*               LISTEN      off (<span class="hljs-number">0.00</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">172.17</span><span class="hljs-number">.230</span><span class="hljs-number">.8</span>:<span class="hljs-number">22</span>         <span class="hljs-number">120.228</span><span class="hljs-number">.117</span><span class="hljs-number">.136</span>:<span class="hljs-number">11178</span>   ESTABLISHED keepalive (<span class="hljs-number">290.45</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+tcp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">172.17</span><span class="hljs-number">.230</span><span class="hljs-number">.8</span>:<span class="hljs-number">22</span>         <span class="hljs-number">223.153</span><span class="hljs-number">.86</span><span class="hljs-number">.67</span>:<span class="hljs-number">63967</span>     ESTABLISHED keepalive (<span class="hljs-number">7111.75</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+tcp        <span class="hljs-number">0</span>    <span class="hljs-number">600</span> <span class="hljs-number">172.17</span><span class="hljs-number">.230</span><span class="hljs-number">.8</span>:<span class="hljs-number">22</span>         <span class="hljs-number">223.153</span><span class="hljs-number">.86</span><span class="hljs-number">.67</span>:<span class="hljs-number">63770</span>     ESTABLISHED on (<span class="hljs-number">0.26</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+tcp6       <span class="hljs-number">0</span>      <span class="hljs-number">0</span> :::<span class="hljs-number">111</span>                  :::*                    LISTEN      off (<span class="hljs-number">0.00</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+tcp6       <span class="hljs-number">0</span>      <span class="hljs-number">0</span> :::<span class="hljs-number">22</span>                   :::*                    LISTEN      off (<span class="hljs-number">0.00</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+tcp6       <span class="hljs-number">0</span>      <span class="hljs-number">0</span> :::<span class="hljs-number">9090</span>                 :::*                    LISTEN      off (<span class="hljs-number">0.00</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+udp        <span class="hljs-number">0</span>      <span class="hljs-number">0</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">68</span>              <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:*                           off (<span class="hljs-number">0.00</span>/<span class="hljs-number">0</span>/<span class="hljs-number">0</span>)
+
+
+#查看当前系统用户
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> opt]$ cat /etc/passwd
+root:x:<span class="hljs-number">0</span>:<span class="hljs-number">0</span>:root:/root:/bin/bash
+bin:x:<span class="hljs-number">1</span>:<span class="hljs-number">1</span>:bin:/bin:/sbin/nologin
+daemon:x:<span class="hljs-number">2</span>:<span class="hljs-number">2</span>:daemon:/sbin:/sbin/nologin
+adm:x:<span class="hljs-number">3</span>:<span class="hljs-number">4</span>:adm:/var/adm:/sbin/nologin
+lp:x:<span class="hljs-number">4</span>:<span class="hljs-number">7</span>:lp:/var/spool/lpd:/sbin/nologin
+sync:x:<span class="hljs-number">5</span>:<span class="hljs-number">0</span>:sync:/sbin:/bin/sync
+shutdown:x:<span class="hljs-number">6</span>:<span class="hljs-number">0</span>:shutdown:/sbin:/sbin/shutdown
+halt:x:<span class="hljs-number">7</span>:<span class="hljs-number">0</span>:halt:/sbin:/sbin/halt
+mail:x:<span class="hljs-number">8</span>:<span class="hljs-number">12</span>:mail:/var/spool/mail:/sbin/nologin
+operator:x:<span class="hljs-number">11</span>:<span class="hljs-number">0</span>:operator:/root:/sbin/nologin
+games:x:<span class="hljs-number">12</span>:<span class="hljs-number">100</span>:games:/usr/games:/sbin/nologin
+ftp:x:<span class="hljs-number">14</span>:<span class="hljs-number">50</span>:FTP User:/var/ftp:/sbin/nologin
+nobody:x:<span class="hljs-number">65534</span>:<span class="hljs-number">65534</span>:Kernel Overflow User:/:/sbin/nologin
+systemd-coredump:x:<span class="hljs-number">999</span>:<span class="hljs-number">997</span>:systemd Core Dumper:/:/sbin/nologin
+systemd-network:x:<span class="hljs-number">192</span>:<span class="hljs-number">192</span>:systemd Network Management:/:/sbin/nologin
+systemd-resolve:x:<span class="hljs-number">193</span>:<span class="hljs-number">193</span>:systemd Resolver:/:/sbin/nologin
+sshd:x:<span class="hljs-number">74</span>:<span class="hljs-number">74</span>:Privilege-separated SSH:/var/empty/sshd:/sbin/nologin
+systemd-timesync:x:<span class="hljs-number">998</span>:<span class="hljs-number">995</span>:systemd Time Synchronization:/:/sbin/nologin
+tss:x:<span class="hljs-number">59</span>:<span class="hljs-number">59</span>:Account used by the trousers package to sandbox the tcsd daemon:/dev/<span class="hljs-literal">null</span>:/sbin/nologin
+unbound:x:<span class="hljs-number">997</span>:<span class="hljs-number">994</span>:Unbound DNS resolver:/etc/unbound:/sbin/nologin
+polkitd:x:<span class="hljs-number">996</span>:<span class="hljs-number">993</span>:User <span class="hljs-keyword">for</span> polkitd:/:/sbin/nologin
+saslauth:x:<span class="hljs-number">995</span>:<span class="hljs-number">76</span>:Saslauthd user:/run/saslauthd:/sbin/nologin
+libstoragemgmt:x:<span class="hljs-number">994</span>:<span class="hljs-number">990</span>:daemon account <span class="hljs-keyword">for</span> libstoragemgmt:/var/run/lsm:/sbin/nologin
+rpc:x:<span class="hljs-number">32</span>:<span class="hljs-number">32</span>:Rpcbind Daemon:/var/lib/rpcbind:/sbin/nologin
+geoclue:x:<span class="hljs-number">993</span>:<span class="hljs-number">989</span>:User <span class="hljs-keyword">for</span> geoclue:/var/lib/geoclue:/sbin/nologin
+chrony:x:<span class="hljs-number">992</span>:<span class="hljs-number">988</span>::/var/lib/chrony:/sbin/nologin
+mysql:x:<span class="hljs-number">27</span>:<span class="hljs-number">27</span>:MySQL Server:/var/lib/mysql:/sbin/nologin
+lightdm:x:<span class="hljs-number">991</span>:<span class="hljs-number">987</span>::/var/lib/lightdm:/sbin/nologin
+rtkit:x:<span class="hljs-number">172</span>:<span class="hljs-number">172</span>:RealtimeKit:/proc:/sbin/nologin
+ldap:x:<span class="hljs-number">55</span>:<span class="hljs-number">55</span>:OpenLDAP server:/var/lib/ldap:/sbin/nologin
+apache:x:<span class="hljs-number">48</span>:<span class="hljs-number">48</span>:Apache:/usr/share/httpd:/sbin/nologin
+dhcpd:x:<span class="hljs-number">177</span>:<span class="hljs-number">177</span>:DHCP server:/:/sbin/nologin
+rpcuser:x:<span class="hljs-number">29</span>:<span class="hljs-number">29</span>:RPC Service User:/var/lib/nfs:/sbin/nologin
+cockpit-ws:x:<span class="hljs-number">990</span>:<span class="hljs-number">983</span>:User <span class="hljs-keyword">for</span> cockpit-ws:/nonexisting:/sbin/nologin
+named:x:<span class="hljs-number">25</span>:<span class="hljs-number">25</span>:Named:/var/named:/bin/<span class="hljs-literal">false</span>
+setroubleshoot:x:<span class="hljs-number">989</span>:<span class="hljs-number">982</span>::/var/lib/setroubleshoot:/sbin/nologin
+pulse:x:<span class="hljs-number">171</span>:<span class="hljs-number">171</span>:PulseAudio System Daemon:/var/run/pulse:/sbin/nologin
+tomcat:x:<span class="hljs-number">91</span>:<span class="hljs-number">91</span>:Apache Tomcat:/usr/share/tomcat:/sbin/nologin
+pesign:x:<span class="hljs-number">988</span>:<span class="hljs-number">979</span>:Group <span class="hljs-keyword">for</span> the pesign signing daemon:/var/run/pesign:/sbin/nologin
+ntp:x:<span class="hljs-number">38</span>:<span class="hljs-number">38</span>::/etc/ntp:/sbin/nologin
+dnsmasq:x:<span class="hljs-number">977</span>:<span class="hljs-number">977</span>:Dnsmasq DHCP <span class="hljs-keyword">and</span> DNS server:/var/lib/dnsmasq:/usr/sbin/nologin
+dbus:x:<span class="hljs-number">976</span>:<span class="hljs-number">976</span>:System Message Bus:/:/usr/sbin/nologin
+greatwall:x:<span class="hljs-number">1000</span>:<span class="hljs-number">1000</span>::/home/greatwall:/bin/bash
+nginx:x:<span class="hljs-number">975</span>:<span class="hljs-number">975</span>:Nginx web server:/var/lib/nginx:/sbin/nologin
+
+#使用history
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> opt]$ history
+    <span class="hljs-number">1</span>  cd /usr/sbin/
+    <span class="hljs-number">2</span>  ls
+    <span class="hljs-number">3</span>  pwd
+    <span class="hljs-number">4</span>  sudo su -
+    <span class="hljs-number">5</span>  ls
+    <span class="hljs-number">6</span>  netstat
+    <span class="hljs-number">7</span>  sudo apt install nginx
+    <span class="hljs-number">8</span>  yum install nginx
+    <span class="hljs-number">9</span>  sudo yum install nginx
+   <span class="hljs-number">10</span>  <span class="hljs-keyword">set</span> +o history;
+   <span class="hljs-number">11</span>  ls
+   <span class="hljs-number">12</span>  sudo yum install nginx
+   <span class="hljs-number">13</span>  top
+   <span class="hljs-number">14</span>  cat /proc/cpuinfo 
+   <span class="hljs-number">15</span>  ；lvdisplay
+   <span class="hljs-number">16</span>  df
+   <span class="hljs-number">17</span>  ps aux
+   <span class="hljs-number">18</span>  ps aux｜less
+   <span class="hljs-number">19</span>  ps aux|less
+   <span class="hljs-number">20</span>  uname -a
+   <span class="hljs-number">21</span>  ifconfig
+   <span class="hljs-number">22</span>  cat /etc/resolve.conf
+   <span class="hljs-number">23</span>  cat /etc/resolv.conf
+   <span class="hljs-number">24</span>  ls /etc
+   <span class="hljs-number">25</span>  touch <span class="hljs-number">1</span>
+   <span class="hljs-number">26</span>  cp resolv.conf /opt/<span class="hljs-number">1</span>
+   <span class="hljs-number">27</span>  cp /etc/locale.conf /opt/<span class="hljs-number">1</span>
+   <span class="hljs-number">28</span>  sudo cp /etc/locale.conf /opt/<span class="hljs-number">1</span>
+   <span class="hljs-number">29</span>  cd /opt/
+   <span class="hljs-number">30</span>  ls
+   <span class="hljs-number">31</span>  vim <span class="hljs-number">1</span>
+   <span class="hljs-number">32</span>  netstat -ano
+   <span class="hljs-number">33</span>  netstat
+   <span class="hljs-number">34</span>  cat /etc/passwd
+   <span class="hljs-number">35</span>  history</code></pre>
+
+
+
+<h2 id="0x02-网络配置"><a href="#0x02-网络配置" class="headerlink" title="0x02 网络配置"></a>0x02 网络配置</h2><pre><code class="hljs angelscript">#修改dns配置为<span class="hljs-number">114.114</span><span class="hljs-number">.114</span><span class="hljs-number">.114</span>
+sudo vim /etc/resolv.conf
+修改成如下
+; generated by /usr/sbin/dhclient-script
+nameserver <span class="hljs-number">223.5</span><span class="hljs-number">.5</span><span class="hljs-number">.5</span>
+nameserver <span class="hljs-number">114.114</span><span class="hljs-number">.114</span><span class="hljs-number">.114</span>
+
+#查看路由配置
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> opt]$ ip route show
+<span class="hljs-keyword">default</span> via <span class="hljs-number">172.17</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> dev enp1s0 
+<span class="hljs-number">169.254</span><span class="hljs-number">.169</span><span class="hljs-number">.254</span> via <span class="hljs-number">172.17</span><span class="hljs-number">.255</span><span class="hljs-number">.254</span> dev enp1s0 proto static 
+<span class="hljs-number">172.17</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">16</span> dev enp1s0 proto kernel scope link src <span class="hljs-number">172.17</span><span class="hljs-number">.230</span><span class="hljs-number">.8</span> 
+<span class="hljs-number">172.18</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>/<span class="hljs-number">16</span> dev docker0 proto kernel scope link src <span class="hljs-number">172.18</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> linkdown 
+
+#SeLinux
+  Kernel <span class="hljs-number">2.6</span> 时代，那时候引入了一个新的安全系统，用以提供访问控制安全策略的机制。这个系统就是Security Enhanced Linux (SELinux)，它是由美国国家安全局（NSA）贡献的，它为Linux内核子系统引入了一个健壮的强制控制访问Mandatory Access Control架构。
+
+	通过getenforce,setenforce来改变状态，disable为关闭
+[<span class="hljs-symbol">greatwall@</span><span class="hljs-number">172</span><span class="hljs-number">-17</span><span class="hljs-number">-230</span><span class="hljs-number">-8</span> opt]$ sestatus 
+SELinux status:                 disabled
+
+#iptables
+这个在比赛中用来做禁用别人后门时用过
+sudo lsof -i:<span class="hljs-number">80</span> 			查看<span class="hljs-number">80</span>端口是否占用
+sudo iptables -I INPUT -p tcp --dport <span class="hljs-number">8080</span> -j ACCEPT
+sudo iptables-save
+这样的方法重启后会失效
+
+安装iptables-persistent
+sudo apt-<span class="hljs-keyword">get</span> install iptables-persistent
+
+持久化规则
+sudo netfilter-persistent save
+sudo netfilter-persistent reload
+可用新组件持久化
+
+#nmap使用
+这可太熟了<span class="hljs-number">23333</span>
+nmap -A -v -T4 <span class="hljs-number">36.158</span><span class="hljs-number">.226</span><span class="hljs-number">.26</span>                                                          ✔  <span class="hljs-number">2344</span>  <span class="hljs-number">20</span>:<span class="hljs-number">02</span>:<span class="hljs-number">00</span>
+Starting Nmap <span class="hljs-number">7.91</span> ( https:<span class="hljs-comment">//nmap.org ) at 2021-03-22 20:26 CST</span>
+NSE: Loaded <span class="hljs-number">153</span> scripts <span class="hljs-keyword">for</span> scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>
+Completed NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>, <span class="hljs-number">0.00</span>s elapsed
+Initiating NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>
+Completed NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>, <span class="hljs-number">0.00</span>s elapsed
+Initiating NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>
+Completed NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>, <span class="hljs-number">0.00</span>s elapsed
+Initiating Ping Scan at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>
+Scanning <span class="hljs-number">36.158</span><span class="hljs-number">.226</span><span class="hljs-number">.26</span> [<span class="hljs-number">2</span> ports]
+Completed Ping Scan at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>, <span class="hljs-number">2.01</span>s elapsed (<span class="hljs-number">1</span> total hosts)
+Nmap scan report <span class="hljs-keyword">for</span> <span class="hljs-number">36.158</span><span class="hljs-number">.226</span><span class="hljs-number">.26</span> [host down]
+NSE: Script Post-scanning.
+Initiating NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>
+Completed NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>, <span class="hljs-number">0.00</span>s elapsed
+Initiating NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>
+Completed NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>, <span class="hljs-number">0.00</span>s elapsed
+Initiating NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>
+Completed NSE at <span class="hljs-number">20</span>:<span class="hljs-number">26</span>, <span class="hljs-number">0.00</span>s elapsed
+Read data files <span class="hljs-keyword">from</span>: /usr/local/bin/../share/nmap
+Note: Host seems down. If it <span class="hljs-keyword">is</span> really up, but blocking our ping probes, <span class="hljs-keyword">try</span> -Pn
+Nmap done: <span class="hljs-number">1</span> IP address (<span class="hljs-number">0</span> hosts up) scanned <span class="hljs-keyword">in</span> <span class="hljs-number">2.47</span> seconds</code></pre>
+
+
+
+<h2 id="0x03-Nginx"><a href="#0x03-Nginx" class="headerlink" title="0x03 Nginx"></a>0x03 Nginx</h2><h3 id="Nginx-配置"><a href="#Nginx-配置" class="headerlink" title="Nginx 配置"></a>Nginx 配置</h3><p>/etc/nginx/nginx.conf</p>
+<p>把默认端口修改为8081</p>
+
+            </article>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" target="_blank" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <div class="post-prev col-6">
+                    
+                    
+                  </div>
+                  <div class="post-next col-6">
+                    
+                    
+                  </div>
+                </div>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;ディレクトリ</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">検索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">キーワード</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: 'article.markdown-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "cc学习&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
